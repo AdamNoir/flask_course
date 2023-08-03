@@ -1,0 +1,23 @@
+{% extends 'layout/base_template.html' %}
+
+{% block container %}
+    <h3>Producto: {{ product_details['name'] }}</h3>
+    <p>Categoria: {{ product_details['category'] }}</p>
+
+    {% if product_details['price'] is none%}
+        <p>Precio: Precio no disponible.</p>
+    {% else %}
+        <p>Precio: ${{ product_details['price'] }}</p>
+    {% endif %}
+    
+    {% if product_details['price'] is none%}
+        <p>Estatus precio: Precio no disponible.</p>
+    {% else %}
+        {% if product_details['price'] > 1000 %}
+            <p>Estatus precio: Precio regular.</p>
+        {% else %}
+            <p>Estatus Precio: ¡Precio en Oferta!</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

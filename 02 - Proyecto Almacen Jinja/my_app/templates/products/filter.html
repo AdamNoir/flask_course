@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{product_details['name']}}</title>
+</head>
+<body>
+    <h3>{{product_details['name']}}</h3>
+    <p>{{product_details['category']}}</p>
+
+    <!--Filtros-->
+    <p>Filtro por Default: {{product_details['price'] | default('Sin precio registrado', True) }}</p>
+    
+    <p>Filtro por safe para texto enriquecido: <br> {{ "<h1>Hola mundo</h1>" | safe() }}</p>
+    
+    <p>{{ "<script>alert('Alerta desde jinja usando filtro safe')</script>" | safe() }}</p>
+
+    <p>Filtro Truncate: {{ "Bro ipsum dolor sit amet bB carbon groomer huck. White room chain suck rock roll Skate dope." | truncate(23) }}</p>
+
+    <p>Filtro Count: {{ "Bro ipsum dolor sit amet bB carbon groomer huck. White room chain suck rock roll Skate dope." | count() }}</p>
+
+    <p>Filtro Float (con numeros o string): {{ 70 | float() }}</p>
+
+    <p>Filtro Int (con numeros o string): {{ "40.124" | int() }}</p>
+
+    <p>Filtro Round: {{ 3.14159265358979323846 | round(4) }}</p>
+
+    <p>Filtro Join: {{ ["usuario1", "usario2"] | join(" - ") }}</p>
+
+    <p>Filtro Length: {{ ["usuario1", "usario2"] | length() }}</p>
+
+    <p>Filtro toJson: {{ {'id': 123, 'name': 'matt smith'} | tojson() }}</p>
+
+    <!--Filtros Personalizados-->
+    <p>Filtro Iva (en viwes de products): {{ product_details | iva() }}</p>
+    <p>Filtro My Double (en init principal): {{ product_details['price'] | mydouble() }}</p>
+
+    <!--LOPP-->
+    <h3>Variable Loop</h3>
+    {% for key, product in products.items() %}
+        <div>
+            <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
+            {{ loop.index }}
+            {{ loop.index0 }}
+            {{ loop.revindex }}
+            {{ loop.cycle('PAR', 'IMPAR') }} <!--Puede tener mas elementos el ciclo-->
+            {{ loop.previtem }}
+        </div>
+    {% endfor %}
+</body>
+</html>

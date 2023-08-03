@@ -1,0 +1,40 @@
+{% extends 'layout/base_template.html' %}
+
+{% block container %}
+    <h3>Todos los Productos</h3>
+    {% for key, product in products.items() %}
+        <ul>
+            <li>
+                <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
+            </li>
+        </ul>
+    {% endfor %}
+
+    <h3>Precio Regular</h3>
+    {% for key, product in products.items() if product['price'] and product['price'] > 1000 %}
+        <ul>
+            <li>
+                <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
+            </li>
+        </ul>
+    {% endfor %}
+
+    <h3>Precio en oferta</h3>
+    {% for key, product in products.items() if product['price'] and product['price'] < 1000 %}
+        <ul>
+            <li>
+                <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
+            </li>
+        </ul>
+    {% endfor %}
+
+    <h3>Precio no disponible</h3>
+    {% for key, product in products.items() if product['price'] is none %}
+        <ul>
+            <li>
+                <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
+            </li>
+        </ul>
+    {% endfor %}
+
+{% endblock %}
