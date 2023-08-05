@@ -3,7 +3,8 @@ class BaseConfig(object):
     SECRET_KEY = 'Key'
     DEBUG = True
     TESTING = False
-
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:Guz48074$@localhost:3306/my_tests"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(BaseConfig):
     """PRODUCTION CONFIGURATION"""

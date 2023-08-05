@@ -2,39 +2,27 @@
 
 {% block container %}
     <h3>Todos los Productos</h3>
-    {% for key, product in products.items() %}
+    {% for product in products.items %}
         <ul>
             <li>
-                <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
+                <a href="{{ url_for('products.product_by_id', product_id=product['product_id']) }}">{{ product['product_name'] }}</a>
+                <a href="{{ url_for('products.update_product', product_id=product['product_id']) }}">Editar</a>
+                <a href="{{ url_for('products.delete_product', product_id=product['product_id']) }}">Eliminar</a>
             </li>
         </ul>
     {% endfor %}
-
-    <h3>Precio Regular</h3>
-    {% for key, product in products.items() if product['price'] and product['price'] > 1000 %}
-        <ul>
-            <li>
-                <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
-            </li>
-        </ul>
-    {% endfor %}
-
-    <h3>Precio en oferta</h3>
-    {% for key, product in products.items() if product['price'] and product['price'] < 1000 %}
-        <ul>
-            <li>
-                <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
-            </li>
-        </ul>
-    {% endfor %}
-
-    <h3>Precio no disponible</h3>
-    {% for key, product in products.items() if product['price'] is none %}
-        <ul>
-            <li>
-                <a href="{{ url_for('products.product_by_id', product_id=key) }}">{{ product['name'] }}</a>
-            </li>
-        </ul>
-    {% endfor %}
+    <div class=pagination>
+        {%- for page in products.iter_pages() %}
+          {% if page %}
+            {% if page != products.page %}
+              <a href="{{ url_for('products.products_list', page=page) }}">{{ page }}</a>
+            {% else %}
+              <strong>{{ page }}</strong>
+            {% endif %}
+          {% else %}
+            <span class=ellipsis>…</span>
+          {% endif %}
+        {%- endfor %}
+        </div>
 
 {% endblock %}
