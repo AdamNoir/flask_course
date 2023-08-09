@@ -5,13 +5,13 @@
         <h3>Menú</h3>
         <ul>
             <li>
-                <a href="http://localhost:5000/products">Productos</a>
+                <a href="{{url_for('products.products_list')}}">Productos</a>
             </li>
             <li>
                 <a href="http://localhost:5000/filter/3">Prueba de Filtros</a>
             </li>
             <li>
-                <a href="http://localhost:5000/create-product">Crear Producto</a>
+                <a href="{{url_for('products.create_product')}}">Crear Producto</a>
             </li>
         </ul>
     </div>

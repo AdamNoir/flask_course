@@ -1,8 +1,10 @@
-{{product_form.product_name.label}}
-{{product_form.product_name}}
-<br>
-<br>
-{{product_form.product_price.label}}
-{{product_form.product_price}}
-<br>
-<br>
+
+<div class="mb-3">
+    {{product_form.product_name.label(class="form-label")}}
+    {{product_form.product_name(class="form-control")}}
+</div>
+
+<div class="mb-3">
+    {{product_form.product_price.label(class="form-label")}}
+    {{product_form.product_price(class="form-control")}}
+</div>
